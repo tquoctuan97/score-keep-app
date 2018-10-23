@@ -9,8 +9,18 @@ const renderPlayers = playerList => {
     return (
       <p key={player._id}>
         {player.name} has {player.score} point(s).
-        <button onClick={()=> {
-          Players.remove({_id: player._id})
+        <button onClick={() => {
+          Players.update(player._id,{
+            $inc: {score: 1}
+          });
+        }}>+1</button>
+        <button onClick={() => {
+          Players.update(player._id,{
+            $inc: {score: -1}
+          });
+        }}>-1</button>
+        <button onClick={() => {
+          Players.remove(player._id);
         }}>X</button>
       </p>
     );
@@ -30,6 +40,7 @@ const handleSubmit = (e) => {
     });
   }  
 }
+
 
 Meteor.startup(() => {
   Tracker.autorun(() => {
