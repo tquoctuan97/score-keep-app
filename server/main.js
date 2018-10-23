@@ -1,8 +1,10 @@
-// import './../imports/utlis';
-// import myDefault, {greetUser} from './../imports/utlis';
-import ngonlanh from './../imports/math';
+import {Meteor} from 'meteor/meteor';
+import {Players} from './../imports/api/players';
 
-// console.log('Log from /server/main.js');
-console.log(ngonlanh(10, 9));
-// console.log(greetUser());
-// console.log(myDefault);
+Meteor.startup(function(){
+    Players.insert({
+        name: 'Xuan',
+        score: 10
+    });
+    console.log(Players.find().fetch());
+});
