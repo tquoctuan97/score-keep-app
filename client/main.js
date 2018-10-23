@@ -14,11 +14,21 @@ const renderPlayers = playerList => {
   });
 };
 
-Meteor.startup(function() {
-  // Call tracker.autorun
-  // Create variable called players -> set equal to fetch query
-  // Render player to the screen
+const handleSubmit = function(e){
+  let playerName = e.target.playerName.value;
 
+  e.preventDefault();
+  
+  if(playerName) {
+    e.target.playerName.value = '';
+    Players.insert({
+      name: playerName,
+      score: 0
+    });
+  }  
+}
+
+Meteor.startup(function() {
   Tracker.autorun(function() {
     let players = Players.find().fetch();
     let title = 'Score Keep';
@@ -29,14 +39,12 @@ Meteor.startup(function() {
         <p>Hello {name}</p>
         <p>This is my second p</p>
         {renderPlayers(players)}
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="playerName" placeholder="Add player" />
+          <button>Add</button>
+        </form>
       </div>
     );
     ReactDOM.render(jsx, document.getElementById('app'));
-  });
-
-  //insert new doc into collection
-    Players.insert({
-      name: 'Hang',
-      score: 99
   });
 });
