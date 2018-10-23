@@ -9,12 +9,15 @@ const renderPlayers = playerList => {
     return (
       <p key={player._id}>
         {player.name} has {player.score} point(s).
+        <button onClick={()=> {
+          Players.remove({_id: player._id})
+        }}>X</button>
       </p>
     );
   });
 };
 
-const handleSubmit = function(e){
+const handleSubmit = (e) => {
   let playerName = e.target.playerName.value;
 
   e.preventDefault();
@@ -28,8 +31,8 @@ const handleSubmit = function(e){
   }  
 }
 
-Meteor.startup(function() {
-  Tracker.autorun(function() {
+Meteor.startup(() => {
+  Tracker.autorun(() => {
     let players = Players.find().fetch();
     let title = 'Score Keep';
     let name = 'Tuấn';
