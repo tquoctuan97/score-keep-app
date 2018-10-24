@@ -6,25 +6,20 @@ import { Tracker } from 'meteor/tracker';
 
 import TitleBar from './../imports/ui/TitleBar';
 import AddPlayer from './../imports/ui/AddPlayer';
-import Player from './../imports/ui/Player';
+import ListPlayer from '../imports/ui/ListPlayer';
 
-const renderPlayers = playerList => {
-  return playerList.map(player => {
-    return <Player key={player._id} player={player}/>
-  });
-};
+
 
 
 Meteor.startup(() => {
   Tracker.autorun(() => {
     let title = 'Score Keeper App';
-    let author = 'Tuan';
     let players = Players.find().fetch();
     let jsx = (
       <div>
-        <TitleBar title={title} subtitle={author}/>
-        {renderPlayers(players)}
-        <AddPlayer score={10}/>
+        <TitleBar title={title} subtitle="Created by Tuan"/>
+        <ListPlayer players={players}/>
+        <AddPlayer/>
       </div>
     );
     ReactDOM.render(jsx, document.getElementById('app'));

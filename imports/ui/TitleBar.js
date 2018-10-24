@@ -6,7 +6,7 @@ class TitleBar extends React.Component {
       return (
         <div>
             <h1>{this.props.title}</h1>
-            <h3>Created by {this.props.subtitle}</h3>
+            <h3>{this.props.subtitle}</h3>
         </div>
       );
     }
