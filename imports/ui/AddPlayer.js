@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import Players from './../api/players';
+import {Players} from './../api/players';
 
 class AddPlayer extends Component {
   handleSubmit = (e) => {
-    let playerName = e.target.playerName.value;
-  
+    let player = e.target.playerName.value;
     e.preventDefault();
-    
-    if(playerName) {
+    if(player){
       e.target.playerName.value = '';
       Players.insert({
-        name: playerName,
+        name: player,
         score: 0
-      });
-    }  
+      })
+    }
   }
 
   render() {
